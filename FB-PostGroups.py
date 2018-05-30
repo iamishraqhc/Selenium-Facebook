@@ -61,15 +61,16 @@ for grupos in links_grupos:
 	# Adiciona uma imagem
 	if com_imagem:
 		
-		add_imagem = driver.find_element_by_name("view_photo")
-		add_imagem.click()
+		add_imagem = driver.find_element_by_name("view_photo").click()
 
 		driver.find_element_by_name("file1").send_keys(caminho_imagem)
 		driver.find_element_by_name("add_photo_done").click()
 
 	# Encontrar elemento do campo de publicar pelo atributo
-	publicar = driver.find_element_by_name("view_post")
-	publicar.click()
+	publicar = driver.find_element_by_name("view_post").click()
+
+	# Encontrar elemento do campo de concluir pelo atributo
+	finaliza = driver.find_element_by_name("done").click()
 
 	# Espera 5 segundos
 	time.sleep(5)
