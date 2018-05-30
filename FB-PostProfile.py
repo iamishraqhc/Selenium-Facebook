@@ -59,7 +59,7 @@ if com_imagem:
 # Encontrar elemento do campo de publicar pelo atributo
 publicar = driver.find_element_by_name("view_post").click()
 
-# Encontrar elemento do campo de publicar pelo atributo
+# Encontrar elemento do campo de concluir pelo atributo
 finaliza = driver.find_element_by_name("done").click()
 
 # Espera 5 segundos
