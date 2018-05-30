@@ -21,7 +21,7 @@ driver.get('https://mbasic.facebook.com')
 email = driver.find_element_by_name("email")
 
 # Digita o e-mail no campo de e-mail pelo atributo
-email.send_keys('E-MAIL')
+email.send_keys('SEU E-MAIL AQUI')
 
 # Encontrar elemento do campo de senha pelo atributo
 senha = driver.find_element_by_name("pass")
