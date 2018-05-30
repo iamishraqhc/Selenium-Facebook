@@ -18,9 +18,17 @@ FB-Login:
 FB-PostGroups:
 -----------
 - Linha 24. Informe seu e-mail de login do Facebook.
+- Linha 39. Informe se vai ser postado uma imagem.
 - Linha 42. Informe o caminho onde está a imagem a ser postada.
 - Linha 45. Links dos grupos do Facebook onde sera postado, lembre que utilizar o modo Mobile BASIC (mbasic.facebook.com/).
 - LInha 59. Mensagem a ser postada nos grupos.
+-----------
+FB-PostProfile:
+-----------
+- Linha 24. Informe seu e-mail de login do Facebook.
+- Linha 39. Informe se vai ser postado uma imagem.
+- Linha 42. Informe o caminho onde está a imagem a ser postada.
+- LInha 51. Mensagem a ser postada no perfil.
 -----------
 FB-Birthday:
 -----------
