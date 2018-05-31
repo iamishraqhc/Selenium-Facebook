@@ -20,6 +20,7 @@ chave = getpass.getpass("Informe sua senha : ")
 # Criar instância do navegador
 driver = webdriver.Firefox()
 
+# Minimiza a janela do navegador.
 driver.minimize_window()
 
 # Acessa a página de login do Facebook
