@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import time, getpass
+import os, time, getpass
 
 # Solicita a senha do Facebook
 chave = getpass.getpass('Informe sua senha : ')
@@ -67,3 +67,7 @@ time.sleep(5)
 
 # Fechar navegador
 driver.quit()
+
+# Deleta o arquivo de log ao terminar
+if os.path.exists("geckodriver.log"):
+    os.remove("geckodriver.log")
