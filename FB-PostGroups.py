@@ -65,7 +65,10 @@ for grupos in links_grupos:
 
 		driver.find_element_by_name("file1").send_keys(caminho_imagem)
 		driver.find_element_by_name("add_photo_done").click()
-
+	
+	# Espera a pagina ser carregada se a internet estiver lenta
+	espera = driver.set_page_load_timeout(60 * 5)
+	
 	# Encontrar elemento do campo de publicar pelo atributo
 	publicar = driver.find_element_by_name("view_post").click()
 
