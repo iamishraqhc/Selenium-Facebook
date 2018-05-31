@@ -100,6 +100,9 @@ for grupos in links_grupos:
 
 		# Informa que esta sendo adicionando a imagem na postagem
 		print "\033[92m - Adicionando a imagem na postagem."
+		
+	# Espera a pagina ser carregada se a internet estiver lenta
+	espera = driver.set_page_load_timeout(60 * 5)
 
 	# Encontrar elemento do campo de publicar pelo atributo
 	publicar = driver.find_element_by_name("view_post").click()
