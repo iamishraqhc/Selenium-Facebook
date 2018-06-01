@@ -15,7 +15,7 @@ inicio = time.time()
 print "\033[93m - Iniciando o Script."
 
 # Solicita a senha do Facebook
-chave = getpass.getpass("Informe sua senha : ")
+chave = getpass.getpass("033[94m - Informe sua senha do Facebook : ")
 
 # Criar instância do navegador
 driver = webdriver.Firefox()
