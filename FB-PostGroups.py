@@ -38,6 +38,14 @@ def finalizar():
 	# Finaliza o Script
 	sys.exit()
 
+def remove_grupos_repetidos(lista):
+    l = []
+    for i in lista:
+        if i not in l:
+            l.append(i)
+    l.sort()
+    return l
+
 def main():
 	# Define o estilo do Graph
 	Graph = Figlet(font='slant')
@@ -50,7 +58,7 @@ def main():
 
 	# Mostra o Graph
 	print("%s" % (backgroundColor.OKBLUE + backgroundColor.BOLD + GraphRender + backgroundColor.ENDC))
-	print(backgroundColor.FAIL + "\rAutomatização de participação dos grupos do Facebook.\nNão me responsabilizo por possíveis Bloqueios." + backgroundColor.OKBLUE + backgroundColor.BOLD + "\nBy Nícolas Pastorello (https://github.com/nicopastorello)\n" + backgroundColor.ENDC)
+	print(backgroundColor.FAIL + "\rAutomatização de postagem em grupos do Facebook.\nNão me responsabilizo por possíveis Bloqueios." + backgroundColor.OKBLUE + backgroundColor.BOLD + "\nBy Nícolas Pastorello (https://github.com/nicopastorello)\n" + backgroundColor.ENDC)
 
 	# Informa que está sendo iniciado o Script
 	print(backgroundColor.WARNING + "\r[!] Iniciando o Script com sucesso." + backgroundColor.ENDC)
@@ -61,7 +69,7 @@ def main():
 	# Criar instância do navegador
 	driver = webdriver.Firefox()
 
-	# Minimiza a jánela do navegador.
+	# Minimiza a janela do navegador.
 	driver.minimize_window()
 
 	# Acessa a página de login do Facebook
@@ -82,76 +90,48 @@ def main():
 	# Digita a senha no campo de senha pelo atributo
 	senha.send_keys(chave)
 
-	# Simular que o enter sejá precisonado
+	# Simular que o enter seja precisonado
 	senha = driver.find_element_by_name("pass").send_keys(Keys.ENTER)
-
-	# Informa que está fazendo o login no Facebook
-	print(backgroundColor.WARNING + "\r[!] Fazendo login no Facebook." + backgroundColor.ENDC)
 
 	# Espera 5 segundos
 	time.sleep(5)
 
+	# Informa que está fazendo o login no Facebook
+	print(backgroundColor.WARNING + "\r[!] Fazendo login no Facebook." + backgroundColor.ENDC)
+
+	# Verifica se fez login no Facebook
+	try:
+		driver.find_element(By.XPATH,"//input[@value='OK']").click()
+		# Informa que esta logado no Facebook
+		print(backgroundColor.OKGREEN + "\r[+] Logado no Facebook.\n" + backgroundColor.ENDC)
+	except NoSuchElementException:
+		print(backgroundColor.FAIL + "\r[-] Erro: O e-mail ou senha que você inseriu está incorreta." + backgroundColor.ENDC)
+		finalizar()
+
+	# Espera 5 segundos
+	time.sleep(5)
+
+	# Ativa a opção de ter imagem
+	com_imagem = True # True ou False
+
+	# Caminho onde está a imagem
+	caminho_imagem = "/home/nicolas/Downloads/teste.png"
+
 	# Lista dos Grupos do Facebook
 	lista_grupos = [
-		"https://mbasic.facebook.com/groups/bento.brik/",
-		"https://mbasic.facebook.com/groups/bento.ofertas/",
-		"https://mbasic.facebook.com/groups/carimbaqueetopcx/",
-		"https://mbasic.facebook.com/groups/desapegabg/",
-		"https://mbasic.facebook.com/groups/126654534210549/",
-		"https://mbasic.facebook.com/groups/1459711954270466/",
-		"https://mbasic.facebook.com/groups/sobrikebg/",
-		"https://mbasic.facebook.com/groups/1156621451019611/",
-		"https://mbasic.facebook.com/groups/1383351131903410/",
-		"https://mbasic.facebook.com/groups/tratofeitoserra/",
-		"https://mbasic.facebook.com/groups/1500074506917106/",
-		"https://mbasic.facebook.com/groups/1523832431209344/",
-		"https://mbasic.facebook.com/groups/1639117106331699/",
-		"https://mbasic.facebook.com/groups/1582019808750961/",
-		"https://mbasic.facebook.com/groups/258201714291546/",
-		"https://mbasic.facebook.com/groups/749825018361273/",
-		"https://mbasic.facebook.com/groups/brechochiccaxias/",
-		"https://mbasic.facebook.com/groups/613777732097033/",
-		"https://mbasic.facebook.com/groups/607495159274855/",
-		"https://mbasic.facebook.com/groups/598851003589202/",
-		"https://mbasic.facebook.com/groups/596555923695970/",
-		"https://mbasic.facebook.com/groups/581288991887502/",
-		"https://mbasic.facebook.com/groups/524117857681736/",
-		"https://mbasic.facebook.com/groups/BrechoMasculinocxs/",
-		"https://mbasic.facebook.com/groups/469633646536045/",
-		"https://mbasic.facebook.com/groups/FaceBrickCaxias/",
-		"https://mbasic.facebook.com/groups/395554883848795/",
-		"https://mbasic.facebook.com/groups/393549894043627/",
-		"https://mbasic.facebook.com/groups/343172739211759/",
-		"https://mbasic.facebook.com/groups/340154489447409/",
-		"https://mbasic.facebook.com/groups/307770416239580/",
-		"https://mbasic.facebook.com/groups/294998417278124/",
-		"https://mbasic.facebook.com/groups/naoserve/",
-		"https://mbasic.facebook.com/groups/EnjoeiCaxiasDoSul/",
-		"https://mbasic.facebook.com/groups/383826408411478/",
-		"https://mbasic.facebook.com/groups/1509753202620575/",
-		"https://mbasic.facebook.com/groups/545060655622919/",
-		"https://mbasic.facebook.com/groups/492698777546546/",
-		"https://mbasic.facebook.com/groups/sebobg/",
-		"https://mbasic.facebook.com/groups/1450405745237103/",
-		"https://mbasic.facebook.com/groups/275768365965477/",
-		"https://mbasic.facebook.com/groups/718327341606318/",
-		"https://mbasic.facebook.com/groups/545060655622919/",
-		"https://mbasic.facebook.com/groups/negocioscxs/",
-		"https://mbasic.facebook.com/groups/374688152720174/",
-		"https://mbasic.facebook.com/groups/522436421150725/",
-		"https://mbasic.facebook.com/groups/725228584202844/",
-		"https://mbasic.facebook.com/groups/996328937079195/",
-		"https://mbasic.facebook.com/groups/646742192132000/",
-		"https://mbasic.facebook.com/groups/NEGOCIOSDASERRA/",
-		"https://mbasic.facebook.com/groups/Briknaserra/",
-		"https://mbasic.facebook.com/groups/desapegaa/",
-		"https://mbasic.facebook.com/groups/Vendendobentogoncalves/"
+		"https://mbasic.facebook.com/groups/000000001/",
+		"https://mbasic.facebook.com/groups/000000002/",
+		"https://mbasic.facebook.com/groups/000000003/"
+		"https://mbasic.facebook.com/groups/000000004/"
 	]
 
-	# Informa que vai iniciar a participar nos grupos da lista
-	print(backgroundColor.OKGREEN + "\r[!] Iniciando a participar nos Grupos do Facebook.\n" + backgroundColor.ENDC)
+	# Informa que vai iniciar a postagem nos grupos da lista
+	print(backgroundColor.OKGREEN + "\r[!] Iniciando a postagem nos Grupos do Facebook.\n" + backgroundColor.ENDC)
 
-	for grupos in lista_grupos:
+	# Remove grupos repetidos
+	nova_lista_grupos = remove_grupos_repetidos(lista_grupos)
+
+	for grupos in nova_lista_grupos:
 
 		# Acessa o grupo do Facebook
 		driver.get(grupos)
@@ -164,21 +144,69 @@ def main():
 
 		# Informa qual grupo foi acessado 
 		print(backgroundColor.OKGREEN + "\r[+] Acessando o grupo : " + backgroundColor.OKGREEN + backgroundColor.BOLD + nome_grupo + backgroundColor.ENDC)
-			
-		# Espera a pagina ser carregada se a internet estiver lenta
-		espera = driver.set_page_load_timeout(60 * 5)
 
-		# Clica em 'Participar do grupo'
 		try:
-			driver.find_element(By.XPATH,"//input[@value='Participar do grupo']").click()
-			print(backgroundColor.WARNING + "\r[!] Participado do grupo." + backgroundColor.ENDC)
-		except NoSuchElementException:
-			# Informa que já participa
-			print(backgroundColor.FAIL + "\r[-] Erro: Vocẽ já participa neste grupo." + backgroundColor.ENDC)
+			# Encontrar elemento do campo de postagem pelo atributo
+			caixa_mensagem = driver.find_element_by_name("xc_message")
 
-		# Informa que foi finalizado no grupo
-		print(backgroundColor.OKGREEN + "\r[+] Finalizando no grupo.\n" + backgroundColor.ENDC)
+			# Informa que vai ser iniciado a postagem no Grupo
+			print(backgroundColor.WARNING + "\r[!] Iniciado a postagem no grupo." + backgroundColor.ENDC)
 		
+			# Digita a mensagem no campo de postagem pelo atributo
+			caixa_mensagem.send_keys(u"Teste de um script em Selenium para postar em Grupos do Facebook!")
+
+			# Informa que está sendo postado a mensagem
+			print(backgroundColor.OKGREEN + "\r[+] Adicionando a mensagem na postagem." + backgroundColor.ENDC)
+
+			# Verifica se existe a imagem 
+			if os.path.exists(caminho_imagem):
+				# Adiciona uma imagem se estiver ativada
+				if com_imagem:
+					# Espera a pagina ser carregada se a internet estiver lenta
+					espera = driver.set_page_load_timeout(60 * 5)
+					
+					# Encontrar elemento do campo de foto pelo atributo e clica
+					add_imagem = driver.find_element_by_name("view_photo").click()
+
+					# Realiza o upload da imagem pelo 'caminho_imagem'
+					driver.find_element_by_name("file1").send_keys(caminho_imagem)
+
+					# Espera a pagina ser carregada se a internet estiver lenta
+					espera = driver.set_page_load_timeout(60 * 5)
+
+					# Adiciona a imagem a postagem
+					driver.find_element_by_name("add_photo_done").click()
+
+					# Informa que está sendo adicionando a imagem na postagem
+					print(backgroundColor.OKGREEN + "\r[+] Adicionando a imagem na postagem." + backgroundColor.ENDC)
+				else:
+				 	print(backgroundColor.FAIL + "\r[-] Imagem não está ativada." + backgroundColor.ENDC)
+			else:
+				# Informa que a imagem não encontrada
+				print(backgroundColor.FAIL + "\r[-] Erro: Imagem não encontrada." + backgroundColor.ENDC)
+				
+				# Finaliza o Script
+				finalizar()
+			
+			# Espera a pagina ser carregada se a internet estiver lenta
+			espera = driver.set_page_load_timeout(60 * 5)
+
+			# Encontrar elemento do campo de publicar pelo atributo
+			publicar = driver.find_element_by_name("view_post").click()
+
+			# Clica em Concluir somente quando está com uma imagem
+			if com_imagem:
+				# Encontrar elemento do campo de concluir pelo atributo
+				finaliza = driver.find_element_by_name("done").click()
+			
+			# Informa que foi finalizado no grupo que está sendo postado
+			print(backgroundColor.OKGREEN + "\r[+] Finalizando a postagem no grupo.\n" + backgroundColor.ENDC)
+		
+		except NoSuchElementException:
+			print(backgroundColor.FAIL + "\r[-] Erro: Não foi possivel realizar a postagem no grupo.\n" + backgroundColor.ENDC)
+
+		# Espera 5 segundos
+		time.sleep(5)
 
 	# Fechar navegador
 	driver.quit()
