@@ -137,7 +137,7 @@ def main():
 		driver.get(grupos)
 
 		# Espera a pagina ser carregada se a internet estiver lenta
-		espera = driver.set_page_load_timeout(60 * 5)
+		espera = driver.set_page_load_timeout(60 * 50)
 
 		# Pega o nome do Grupo do Facebook que está acessando.
 		nome_grupo = driver.title
@@ -163,7 +163,7 @@ def main():
 				# Adiciona uma imagem se estiver ativada
 				if com_imagem:
 					# Espera a pagina ser carregada se a internet estiver lenta
-					espera = driver.set_page_load_timeout(60 * 5)
+					espera = driver.set_page_load_timeout(60 * 50)
 					
 					# Encontrar elemento do campo de foto pelo atributo e clica
 					add_imagem = driver.find_element_by_name("view_photo").click()
@@ -172,7 +172,7 @@ def main():
 					driver.find_element_by_name("file1").send_keys(caminho_imagem)
 
 					# Espera a pagina ser carregada se a internet estiver lenta
-					espera = driver.set_page_load_timeout(60 * 5)
+					espera = driver.set_page_load_timeout(60 * 50)
 
 					# Adiciona a imagem a postagem
 					driver.find_element_by_name("add_photo_done").click()
@@ -189,13 +189,16 @@ def main():
 				finalizar()
 			
 			# Espera a pagina ser carregada se a internet estiver lenta
-			espera = driver.set_page_load_timeout(60 * 5)
+			espera = driver.set_page_load_timeout(60 * 50)
 
 			# Encontrar elemento do campo de publicar pelo atributo
 			publicar = driver.find_element_by_name("view_post").click()
 
 			# Clica em Concluir somente quando está com uma imagem
 			if com_imagem:
+				# Espera a pagina ser carregada se a internet estiver lenta
+				espera = driver.set_page_load_timeout(60 * 50)
+				
 				# Encontrar elemento do campo de concluir pelo atributo
 				finaliza = driver.find_element_by_name("done").click()
 			
