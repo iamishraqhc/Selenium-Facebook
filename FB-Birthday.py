@@ -105,7 +105,7 @@ def main():
 	
 	# Para cada aniversariante manda os parabens
 	for parabens in aniversariante:
-		parabens.send_keys(random.choice(lista_mensagens)
+		parabens.send_keys(random.choice(lista_mensagens))
 		parabens.send_keys(Keys.RETURN)
 
 		# Espera 2 segundos para parabenizar o proximo
